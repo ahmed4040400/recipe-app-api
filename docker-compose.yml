@@ -10,4 +10,25 @@ services:
       - "./app:/app"
 
     command: >
-      sh -c "python manage.py runserver 0.0.0.0:8000"
+      sh -c "python manage.py wait_for_db &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    # referring to the new db img so the app img can see it
+    environment:
+      - DB_HOST=db
+      - DB_NAME=app
+      - DB_USER=postgres
+      - DB_PASS=password123
+    # finally making the image use that db as the default db
+    depends_on:
+      - db
+
+  # creating a db img to store in it instead of the default sqlite
+  # in this case we're using postgres db
+  db:
+    image: postgres:10-alpine
+    # adding configuration as an environment variables to the db img
+    environment:
+      - POSTGRES_DB=app
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password123

@@ -9,7 +9,14 @@ ENV PYTHONUNBUFFERED 1
 # copy the local requirements.txt into the image dir
 # and then install the requirements
 copy ./requirements.txt /requirements.txt
+RUN apk add --update --no-cache postgresql-client
+# installing temp packages to be able install the postges
+RUN apk add --update --no-cache --virtual .tmp-build-deps \
+        gcc libc-dev linux-headers postgresql-dev
+
 RUN pip install -r requirements.txt
+
+RUN apk del .tmp-build-deps
 
 # making the work directory that all the apps on this img
 # are gonna start from it
