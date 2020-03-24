@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from core_app import models
-# to translate the model field into human readable
+# to translate the model field into any lang wanted
 # in the admin page of django
 from django.utils.translation import gettext as _
 
@@ -37,3 +37,5 @@ class UserAdmin(BaseUserAdmin):
 
 # finally registering the user model into the admin panel
 admin.site.register(models.User, UserAdmin)
+# registering the Tag model with the default admin class simple (crud)
+admin.site.register(models.Tag)

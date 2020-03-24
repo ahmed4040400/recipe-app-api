@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
+from django.conf import settings
 
 
 class UserManager(BaseUserManager):
@@ -42,3 +43,18 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     # adding some extra required fields
     REQUIRED_FIELDS = ['name']
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=150)
+    user = models.ForeignKey(
+        # telling which user we're gonna connect with
+        settings.AUTH_USER_MODEL,
+        # if the connected model object got deleted
+        # we delete this object as well
+        on_delete=models.CASCADE
+
+    )
+
+    def __str__(self):
+        return self.name

@@ -4,13 +4,25 @@ from django.test import TestCase
 # but django recommend using this class
 from django.contrib.auth import get_user_model
 
+from core_app import models
 
-# this is a unit test code that tests
+
+# this is a unit test code that test
 # the custom users model that takes email
 # instead of username
 # we test it using the assertEqual()
 # that takes 2 values if the're equal it return ok
 # if not it returns an error message
+
+def sample_user(email='ahmed@ahmed.com', password='asd123313', name='ahmed'):
+    """create simple user"""
+
+    return get_user_model().objects.create_user(
+        email=email,
+        password=password,
+        name=name
+    )
+
 
 class ModelTest(TestCase):
     # the test method should start with the name test
@@ -55,3 +67,15 @@ class ModelTest(TestCase):
 
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)
+
+    def test_tag_str(self):
+        """test the tag string representation
+           which is the return value of the __str__() in the model
+        """
+
+        tag = models.Tag.objects.create(
+            user=sample_user(),
+            name='ahmed',
+        )
+
+        self.assertEqual(str(tag), tag.name)

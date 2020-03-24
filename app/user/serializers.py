@@ -40,7 +40,7 @@ class UserSerializer(serializers.ModelSerializer):
             so we can know if we're gonna update the pass or not 
         """
         password = validated_data.pop('password', None)
-        # updating every the user except password
+        # updating every thing in the user except password
         # using the super.update method
         user = super().update(instance, validated_data)
 
