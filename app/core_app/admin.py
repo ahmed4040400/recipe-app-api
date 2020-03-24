@@ -39,3 +39,5 @@ class UserAdmin(BaseUserAdmin):
 admin.site.register(models.User, UserAdmin)
 # registering the Tag model with the default admin class simple (crud)
 admin.site.register(models.Tag)
+# registering the Ingredient model with the default admin class simple (crud)
+admin.site.register(models.Ingredient)

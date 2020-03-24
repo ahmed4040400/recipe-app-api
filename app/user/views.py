@@ -30,7 +30,7 @@ class ManageUserView(generics.RetrieveUpdateAPIView):
     # the user can't use the view if not authorized
     permission_classes = (permissions.IsAuthenticated,)
 
-    # overriding the get method to return just the individual user
+    # overriding the get method to return just only the user
     # that's making the request
     def get_object(self):
         return self.request.user

@@ -48,7 +48,22 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Tag(models.Model):
     name = models.CharField(max_length=150)
     user = models.ForeignKey(
-        # telling which user we're gonna connect with
+        # telling which model we're gonna connect with
+        settings.AUTH_USER_MODEL,
+        # if the connected model object got deleted
+        # we delete this object as well
+        on_delete=models.CASCADE
+
+    )
+
+    def __str__(self):
+        return self.name
+
+
+class Ingredient(models.Model):
+    name = models.CharField(max_length=150)
+    user = models.ForeignKey(
+        # telling which model we're gonna connect with
         settings.AUTH_USER_MODEL,
         # if the connected model object got deleted
         # we delete this object as well
