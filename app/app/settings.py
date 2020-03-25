@@ -125,7 +125,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+# a url to access the static files with it
 STATIC_URL = '/static/'
+# a url to access the media files with it
+MEDIA_URL = '/media/'
+
+# where the static files is gonna be stored
+# HOME_URL/static
+STATIC_ROOT = '/vol/web/static'
+# where the media files is gonna be stored
+# HOME_URL/media
+MEDIA_ROOT = '/vol/web/media'
 
 # referring to the custom user model
 AUTH_USER_MODEL = 'core_app.User'

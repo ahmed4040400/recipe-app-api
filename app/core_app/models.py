@@ -73,3 +73,31 @@ class Ingredient(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Recipe(models.Model):
+    """Recipe object"""
+    title = models.CharField(max_length=150)
+    user = user = models.ForeignKey(
+        # telling which model we're gonna connect with
+        settings.AUTH_USER_MODEL,
+        # if the connected model object got deleted
+        # we delete this object as well
+        on_delete=models.CASCADE
+    )
+
+    time_minutes = models.IntegerField()
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    # param blank=True to make this field optional
+    link = models.CharField(max_length=255, blank=True)
+
+    """ManyToManyField() is like ForeignKey() 
+       but it allows to have more than on object for the field
+       on the opposite of the ForeignKey() which allows only 
+       one object for one fields
+    """
+    ingredients = models.ManyToManyField('Ingredient')
+    tags = models.ManyToManyField('Tag')
+
+    def __str__(self):
+        return self.title
