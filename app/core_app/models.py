@@ -77,15 +77,14 @@ class Ingredient(models.Model):
 
 class Recipe(models.Model):
     """Recipe object"""
-    title = models.CharField(max_length=150)
-    user = user = models.ForeignKey(
+    user = models.ForeignKey(
         # telling which model we're gonna connect with
         settings.AUTH_USER_MODEL,
         # if the connected model object got deleted
         # we delete this object as well
         on_delete=models.CASCADE
     )
-
+    title = models.CharField(max_length=150)
     time_minutes = models.IntegerField()
     price = models.DecimalField(max_digits=5, decimal_places=2)
     # param blank=True to make this field optional

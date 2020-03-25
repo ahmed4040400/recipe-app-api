@@ -4,12 +4,12 @@ from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
-from recipe__.serializers import TagSerializer
+from recipe.serializers import TagSerializer
 
 # because we're using viewSet for the tag model
 # so the url for getting the object has to be "tag-list"
 
-TAGS_URL = reverse('recipe__:tag-list')
+TAGS_URL = reverse('recipe:tag-list')
 
 
 # helper func for creating a simple user for testing

@@ -1,14 +1,14 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from recipe__ import views
+from recipe import views
 
 
-# we use routers cause we're using a ViewSet for the tags view
+# we use routers cause we're using a ViewSet for the this views
 router = DefaultRouter()
 router.register('tags', views.TagViewSet)
 router.register('ingredient', views.IngredientViewSet)
-
-app_name = 'recipe__'
+router.register('recipes', views.RecipeViewSet)
+app_name = 'recipe'
 urlpatterns = [
     path('', include(router.urls))
 ]

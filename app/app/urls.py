@@ -20,7 +20,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/user/', include('user.urls')),
-    path('api/recipe__/', include('recipe__.urls')),
+    path('api/recipe/', include('recipe.urls')),
 
     # adding a media url for the media files
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

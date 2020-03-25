@@ -4,9 +4,9 @@ from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
-from recipe__.serializers import IngredientSerializer
+from recipe.serializers import IngredientSerializer
 
-INGREDIENT_URL = reverse('recipe__:ingredient-list')
+INGREDIENT_URL = reverse('recipe:ingredient-list')
 
 
 # helper func for creating a simple user for testing
@@ -66,7 +66,7 @@ class privateIngredientApiTest(TestCase):
         user2 = create_user(email='ahmed@ahmed.com')
         # making a Ingredient with the different user
         Ingredient.objects.create(user=user2, name='whatever')
-        # and then create a tag with the user that authed with the client
+        # and then create a Ingredient with the user that authed with the client
         Ingredient.objects.create(user=self.user, name='ahmed')
         # get the Ingredient list with the authed client
         res = self.client.get(INGREDIENT_URL)
